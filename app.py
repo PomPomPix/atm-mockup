@@ -28,6 +28,9 @@ def login(account_no, PIN_no):
 
 	return render_template(url_for('index'))
 
+def get_balance():
+	
+
 
 # Create a web interface for an ATM using Bootstrap
 # We should be able to login with a account number and PIN
