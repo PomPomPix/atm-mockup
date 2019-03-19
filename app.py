@@ -1,7 +1,8 @@
+import sqlite3
+
 from flask import Flask 
 from flask import redirect, render_template, request, url_for
-
-import sqlite3
+from account import Account
 
 app = Flask(__name__)
 
@@ -10,8 +11,9 @@ DB_FILE_PATH = "data/atm.db"
 @app.route("/", methods = ['POST'], ['GET'])
 def index():
 	if request.method == 'POST':
-		account_no = request.form['account_no']
-		PIN_no = request.form['PIN_no']
+		user_account = Account()
+		if user_account.get_account((request.form['account_no'], request.form['PIN_no']))
+			return render_template('account.html')
 
 	return render_template('index.html')
 
@@ -24,12 +26,21 @@ def login(account_no, PIN_no):
 	cur.execute(query, user)
 	# account = self.cur.fetchone()
 	if cur.fetchone() != None:
-		return render_template('account.html', account=cur.fetchone())
+		return True
 
 	return render_template(url_for('index'))
 
 def get_balance():
-	
+	user = Account()
+	return render_template('account.html', account=cur.fetchone())
+
+def withdraw():
+	redirect (url_for('get_balance'))
+	pass
+
+def deposit():
+	redirect (url_for('get_balance'))
+	pass
 
 
 # Create a web interface for an ATM using Bootstrap
